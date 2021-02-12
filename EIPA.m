@@ -1,4 +1,4 @@
-%%ELEC 4700 PA-5
+%% ELEC 4700 PA-5
 %%Saifuddin Mohammed
 %%101092039
 
@@ -8,11 +8,12 @@ set(0,'defaultaxesfontname','Times New Roman')
 set(0,'DefaultLineLineWidth',2); 
 close all
 
+%%  Harmonic Wave Equation in 2D FD and Modes
 
 nx = 50;
 ny = 50;
 %ny = 30;
-G = sparse(nx*ny,nx*ny);
+G = sparse(nx*ny,nx*ny);  %Creating G matrix using sparse
 
     
 for i = 1:nx
@@ -33,13 +34,18 @@ for i = 1:nx
             G(n, n+ny) = 1;
             G(n, n-ny) = 1;
             
+            
         end
+        
     end
+    
 end
 
 
 figure(1) 
-spy(G)
+
+spy(G) %plotting G using spy        
+
 [E, D] = eigs(G, 9, 'SM'); %PLOTTING EIGENVALUES
 
 V = zeros(nx, ny, 9);
@@ -53,6 +59,6 @@ for z = 1:9
    
    subplot(3, 3, z)
    
-   surf(V(:, :, z))
+   surf(V(:, :, z))     %plotting the eigenvectors 
    
 end
